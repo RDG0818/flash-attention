@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+setup.py
+csrc/bindings.cpp
+csrc/flash_attn_v1_naive.cu
+csrc/flash_attn_v1_smem.cu
+csrc/flash_attn_v1_warp.cu
+flash_attn.egg-info/PKG-INFO
+flash_attn.egg-info/SOURCES.txt
+flash_attn.egg-info/dependency_links.txt
+flash_attn.egg-info/top_level.txt
