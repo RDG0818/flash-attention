@@ -46,9 +46,6 @@ All three CUDA kernels share the same interface and are registered under a singl
 ### Speedup over Naive CUDA
 ![Speedup](figures/speedup_vs_naive.png)
 
-### Peak Memory Allocated
-![Memory](figures/memory_vs_seqlen.png)
-
 ---
 
 ## Build & Run
