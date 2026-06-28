@@ -44,7 +44,7 @@ def _flash_attn_fwd_kernel(
         V = tl.load(V_ptrs, mask=offs_n_j[:, None] < N, other=0.0)
 
         # Attention scores
-        S = tl.dot(Q, K) * scale                                  # (BLOCK_M, BLOCK_N)
+        S = tl.dot(Q, K, allow_tf32=False) * scale                # (BLOCK_M, BLOCK_N)
         S = tl.where(offs_n_j[None, :] < N, S, float('-inf'))    # mask padding
 
         # Online softmax — unnormalized accumulator avoids division in inner loop
@@ -55,7 +55,7 @@ def _flash_attn_fwd_kernel(
         l_j   = tl.sum(P, axis=1)                                 # (BLOCK_M,)
         l_new = alpha * l_i + l_j
 
-        O_acc = alpha[:, None] * O_acc + tl.dot(P, V)
+        O_acc = alpha[:, None] * O_acc + tl.dot(P, V, allow_tf32=False)
         m_i = m_new
         l_i = l_new
 
